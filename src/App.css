@@ -1,3 +1,16 @@
-.grid-container {
+.container {
+  margin: auto;
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 50%;
+  padding: 10px;
+}
+.cell {
+  text-align: center;
+  color: brown;
+  background-color: white;
+  height: max-content;
+  border: 3px solid black;
+  width: 35%;
 }
