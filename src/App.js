@@ -65,21 +65,31 @@ function App() {
   }, []);
 
   return (
-    <div className="board">
-      {
-        guesses.map((guess,i) => {
-          const isCurrentGuess = i === guesses.findIndex(val => val == null);
-          return(
-              <Line 
-              guess = {isCurrentGuess ? currentGuess : guess ?? ''}
-              isFinal = {!isCurrentGuess && guess != null}
-              solution = {solution}
-              />
-          );
-        })
-      }
-        { isGameOver && <Finish solution={solution} isTrue={isTrue}/>}
+    <div className='wordle'>
+      <div className='instructions'>
+        <h1 className='instruction-title'>Instructions</h1>
+        <p className='instruction'>1-after you type in a word with 5 letters you press 'enter' to register it</p>
+        <p className='instruction'>2-if a letter is colored <b>yellow</b> that means that it exists in the word but not in the correct place</p>
+        <p className='instruction'>3-if the letter is colored <b>green</b> then it is in the right place</p>
+        <p className='instruction'>4-if the letter is colored <b>gray</b> then it doesnt exist in the word</p>
+      </div>
+      <div className="board">
+        {
+          guesses.map((guess,i) => {
+            const isCurrentGuess = i === guesses.findIndex(val => val == null);
+            return(
+                <Line 
+                guess = {isCurrentGuess ? currentGuess : guess ?? ''}
+                isFinal = {!isCurrentGuess && guess != null}
+                solution = {solution}
+                />
+            );
+          })
+        }
+          { isGameOver && <Finish solution={solution} isTrue={isTrue}/>}
+      </div>
     </div>
+    
   );
 }
 

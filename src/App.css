@@ -1,3 +1,10 @@
+.wordle{
+  align-items: left;
+  display: flex;
+  flex-direction: column;
+}
+
+
 .board{
   margin-top: 2%;
   align-items: center;
@@ -5,4 +12,17 @@
   flex-direction: column;
   gap: 5px;
 
+}
+
+.instructions{
+  display: block;
+}
+
+.instruction-title{
+  font-size: xx-large;
+}
+
+
+.instruction{
+  font-size: large;
 }
