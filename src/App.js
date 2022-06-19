@@ -9,6 +9,7 @@ function App() {
   const [guesses, setGuesses] = useState(Array(6).fill(null));
   const [currentGuess, setCurrentGuess] = useState('');
   const [isGameOver, setIsGameOver] = useState(false);
+  const [isTrue, setIsTrue] = useState(false);
 
   useEffect(() => {
     const handleType = (event) => {
@@ -31,6 +32,7 @@ function App() {
         if(isCorrect || guesses[4] != null)
         {
           setIsGameOver(true);
+          setIsTrue(isCorrect);
         }
       }
 
@@ -76,7 +78,7 @@ function App() {
           );
         })
       }
-        { isGameOver && <Finish solution={solution} />}
+        { isGameOver && <Finish solution={solution} isTrue={isTrue}/>}
     </div>
   );
 }
