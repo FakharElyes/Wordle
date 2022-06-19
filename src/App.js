@@ -73,6 +73,8 @@ function App() {
         <p className='instruction'>3-if the letter is colored <b>green</b> then it is in the right place</p>
         <p className='instruction'>4-if the letter is colored <b>gray</b> then it doesnt exist in the word</p>
       </div>
+
+
       <div className="board">
         {
           guesses.map((guess,i) => {
@@ -88,6 +90,12 @@ function App() {
         }
           { isGameOver && <Finish solution={solution} isTrue={isTrue}/>}
       </div>
+
+
+        
+
+
+
     </div>
     
   );
