@@ -25,7 +25,6 @@ function App() {
         return;
       }
 
-
       if (event.key === 'Enter') {
         if (currentGuess.length !== 5 ){
           return ;
