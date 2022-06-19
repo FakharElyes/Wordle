@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import data from './constants/data';
+import Line from './Components/Line'
 
 
 const gridWordle = () => {
@@ -14,16 +15,22 @@ const gridWordle = () => {
 
 
 function App() {
-  const [random, setRandom] = useState(0);
-
+  const [randomWord, setRandomWord] = useState('');
+  const [tries, setTries] = useState(Array(6).fill(null));
 
   useEffect(() => {
-    setRandom(Math.floor(Math.random() * data.listWords.length));
+    setRandomWord(data.listWords[Math.floor(Math.random() * data.listWords.length)]);
   }, []);
 
   return (
-    <div className="container">
-       {gridWordle()}
+    <div className="board">
+      {
+        tries.map(guess => {
+          return(
+              <Line guess={guess ?? ''}/>
+          );
+        })
+      }
     </div>
   );
 }
