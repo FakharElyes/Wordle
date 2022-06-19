@@ -10,7 +10,6 @@ function App() {
   const [currentGuess, setCurrentGuess] = useState('');
   const [isGameOver, setIsGameOver] = useState(false);
 
-
   useEffect(() => {
     const handleType = (event) => {
       if(isGameOver){
@@ -27,8 +26,9 @@ function App() {
         setGuesses(newGuesses);
         setCurrentGuess('');
 
+
         const isCorrect = solution === currentGuess;
-        if(isCorrect)
+        if(isCorrect || guesses[4] != null)
         {
           setIsGameOver(true);
         }
@@ -68,17 +68,15 @@ function App() {
         guesses.map((guess,i) => {
           const isCurrentGuess = i === guesses.findIndex(val => val == null);
           return(
-            <div>
               <Line 
               guess = {isCurrentGuess ? currentGuess : guess ?? ''}
               isFinal = {!isCurrentGuess && guess != null}
               solution = {solution}
               />
-              { isGameOver && <Finish />}
-            </div>
           );
         })
       }
+        { isGameOver && <Finish solution={solution} />}
     </div>
   );
 }
