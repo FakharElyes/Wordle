@@ -54,13 +54,17 @@ function App() {
         return;
       }
 
-      setCurrentGuess(oldGuess =>  oldGuess + (event.key).toUpperCase());
+      const isLetter = event.key.match(/^[a-zA-Z]{1}$/) != null ;
+      if(isLetter)
+      {
+        setCurrentGuess(oldGuess =>  oldGuess + (event.key).toUpperCase());
+      }
     };
 
     window.addEventListener('keydown', handleType);
     
     return () => window.removeEventListener('keydown', handleType);
-  }, [currentGuess, isGameOver, solution]);
+  }, [currentGuess, isGameOver, solution, guesses]);
 
 
   useEffect(() => {
