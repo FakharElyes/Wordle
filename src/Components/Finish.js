@@ -37,7 +37,7 @@ const Finish = ({solution, isTrue}) => {
          </div>
         }
         
-        <IoReloadOutline onClick={refreshPage} class={reloadClass}/>
+        <IoReloadOutline onClick={refreshPage} className={reloadClass}/>
       </div>
     );
 }

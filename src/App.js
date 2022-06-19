@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import data from './constants/data';
 import Line from './Components/Line'
 import Finish from './Components/Finish';
+import Keyboard from './Components/Keyboard';
 
 function App() {
   const [solution, setSolution] = useState('');
@@ -92,7 +93,11 @@ function App() {
       </div>
 
 
-        
+        <div>
+          <Keyboard />
+
+
+        </div>
 
 
 
