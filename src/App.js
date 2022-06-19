@@ -13,21 +13,70 @@ const gridWordle = () => {
   return content;
 };
 
-
 function App() {
-  const [randomWord, setRandomWord] = useState('');
-  const [tries, setTries] = useState(Array(6).fill(null));
+  const [solution, setSolution] = useState('');
+  const [guesses, setGuesses] = useState(Array(6).fill(null));
+  const [currentGuess, setCurrentGuess] = useState('');
+  const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
-    setRandomWord(data.listWords[Math.floor(Math.random() * data.listWords.length)]);
+    const handleType = (event) => {
+      if(isGameOver){
+        return;
+      }
+
+
+      if (event.key === 'Enter') {
+        if (currentGuess.length !== 5 ){
+          return ;
+        }
+
+        const newGuesses = [...guesses];
+        newGuesses[guesses.findIndex(val => val == null)] = currentGuess;
+        setGuesses(newGuesses);
+        setCurrentGuess('');
+
+        const isCorrect = solution === currentGuess;
+        if(isCorrect)
+        {
+          setIsGameOver(true);
+        }
+      }
+
+      if(event.key === 'Backspace')
+      {
+        setCurrentGuess(currentGuess.slice(0,-1));
+        return;
+      }
+
+      if(currentGuess.length >= 5)
+      {
+        return;
+      }
+
+      setCurrentGuess(oldGuess =>  oldGuess + (event.key).toUpperCase());
+    };
+
+    window.addEventListener('keydown', handleType);
+    
+    return () => window.removeEventListener('keydown', handleType);
+  }, [currentGuess, isGameOver, solution]);
+
+
+  useEffect(() => {
+    setSolution(data.listWords[Math.floor(Math.random() * data.listWords.length)]);
   }, []);
 
   return (
     <div className="board">
       {
-        tries.map(guess => {
+        guesses.map((guess,i) => {
+          const isCurrentGuess = i === guesses.findIndex(val => val == null);
           return(
-              <Line guess={guess ?? ''}/>
+              <Line 
+              guess = {isCurrentGuess ? currentGuess : guess ?? ''}
+              isFinal = {!isCurrentGuess && guess != null}
+              solution = {solution}/>
           );
         })
       }
