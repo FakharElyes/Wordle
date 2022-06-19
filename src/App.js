@@ -2,22 +2,14 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import data from './constants/data';
 import Line from './Components/Line'
-
-
-const gridWordle = () => {
-  let content = [];
-  for (var i=0; i< 30 ; i++) {
-    let className = "cell cell-" + i;
-    content.push(<div className={className} key={i}>{i}</div>);
-  }
-  return content;
-};
+import Finish from './Components/Finish';
 
 function App() {
   const [solution, setSolution] = useState('');
   const [guesses, setGuesses] = useState(Array(6).fill(null));
   const [currentGuess, setCurrentGuess] = useState('');
   const [isGameOver, setIsGameOver] = useState(false);
+
 
   useEffect(() => {
     const handleType = (event) => {
@@ -76,10 +68,14 @@ function App() {
         guesses.map((guess,i) => {
           const isCurrentGuess = i === guesses.findIndex(val => val == null);
           return(
+            <div>
               <Line 
               guess = {isCurrentGuess ? currentGuess : guess ?? ''}
               isFinal = {!isCurrentGuess && guess != null}
-              solution = {solution}/>
+              solution = {solution}
+              />
+              { isGameOver && <Finish />}
+            </div>
           );
         })
       }
